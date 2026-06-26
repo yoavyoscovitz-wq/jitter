@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./branding.css" />
+    <link rel="stylesheet" href="fonts/inter.css" />
+    <link rel="stylesheet" href="report.css" />
+    <link rel="stylesheet" href="report-certificate.css" />
+    <title>FORENSIC INTEGRITY CERTIFICATE — JITTER</title>
+  </head>
+  <body>
+    <div id="report-config-banner-root" class="no-print"></div>
+    <div class="report-page-shell">
+      <div class="report-page-layout">
+        <div class="report-main-content">
+    <main class="report-wrap">
+      <div class="report-cert-double-border">
+        <div class="report-cert-inner-line">
+          <p class="report-institutional-banner">
+            OFFICIALLY ATTESTED DOCUMENT
+          </p>
+          <div class="report-columns">
+            <div class="report-main-flow">
+
+      <!-- ── Loading ────────────────────────────────────────────────────── -->
+      <section id="report-loading" class="report-loading">
+        <h2>Loading Certificate</h2>
+        <p>Reading your local session data&hellip;</p>
+      </section>
+
+      <!-- ── Insufficient data ──────────────────────────────────────────── -->
+      <section id="report-error" class="report-error hidden">
+        <h2>Insufficient Data for Audit</h2>
+        <p id="report-error-message">A minimum of 100 keystrokes must be recorded in a Google Doc with JITTER active before a forensic certificate can be issued.</p>
+      </section>
+
+      <!-- ── Main certificate ───────────────────────────────────────────── -->
+      <section id="report-content" class="hidden report-content-inner">
+
+        <!-- ══ HEADER — Tight unit: SYSTEM ATTESTATION + Category ══════════ -->
+        <header class="head">
+          <div class="head-super">System Attestation</div>
+          <div id="status-card" class="head-title"><span id="hero-tier">—</span></div>
+          <div id="meta-data-strip" class="head-meta-strip">Protocol v1.0.0 | —% | —</div>
+        </header>
+
+        <!-- ══ DOCUMENT BODY ══════════════════════════════════════════════ -->
+        <div class="flow">
+
+          <!-- ── I. Identification ──────────────────────────────────────── -->
+          <section class="doc-section">
+            <div class="section-roman">I. Identification</div>
+            <p class="cert-statement" id="cert-statement">This certificate attests to the biometric composition integrity of the authorship session identified above. Verdict is derived from keystroke dynamics, cadence variance, and paste-ratio analysis. It does not attest to the semantic content of the document.</p>
+            <div class="section-label">Biometric Integrity Score</div>
+            <div class="section-sub">Cadence compliance index · 0–100 (Synthetic → Human)</div>
+            <div class="humanity-bar-wrap">
+              <svg class="humanity-bar-svg" viewBox="0 0 100 5" preserveAspectRatio="none" aria-hidden="true">
+                <rect id="humanity-bar-fill" class="humanity-bar-fill-rect" x="0" y="0" width="0" height="5" />
+              </svg>
+            </div>
+            <div class="humanity-legend">
+              <span>Synthetic</span>
+              <span>Human Original</span>
+            </div>
+          </section>
+
+          <!-- ── II. Analytical Evidence (flex-grows to fill the void) ──── -->
+          <section class="doc-section doc-section--evidence">
+            <div class="section-roman">II. Analytical Evidence</div>
+
+            <!-- Exhibit A + B side by side -->
+            <div class="evidence-grid">
+
+              <!-- Exhibit A: Cognitive Composition Map -->
+              <div class="exhibit-a">
+                <div class="exhibit-label">Exhibit A</div>
+                <div class="panel-title">Cognitive Composition Map</div>
+                <div id="composition-grid" class="composition-grid"></div>
+                <div class="comp-legend">
+                  <div class="comp-legend-item">
+                    <div class="comp-legend-dot comp-legend-dot--green"></div>
+                    <span>Organic Input</span>
+                  </div>
+                  <div class="comp-legend-item">
+                    <div class="comp-legend-dot comp-legend-dot--red"></div>
+                    <span>Synthetic Input</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Exhibit B: Biometric Keystroke Pulse -->
+              <div class="exhibit-b">
+                <div class="exhibit-label">Exhibit B</div>
+                <div class="panel-title">Biometric Keystroke Pulse</div>
+                <svg id="signal-svg" class="signal-svg" viewBox="0 0 600 100" preserveAspectRatio="none">
+                  <path id="signal-path" class="signal-path" d=""></path>
+                </svg>
+                <div id="signal-caption" class="signal-caption"></div>
+              </div>
+
+            </div><!-- /.evidence-grid -->
+
+            <!-- Session Metrics — always open, borderless table -->
+            <div class="technical-annex">
+              <button type="button" class="technical-annex-toggle" id="annex-toggle" aria-expanded="true">Session Metrics</button>
+              <div class="technical-annex-body" id="annex-body">
+                <table class="doc-stats">
+                  <thead>
+                    <tr><th>Metric</th><th>Value</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Keystrokes Logged</td><td class="mono" id="raw-keystrokes">—</td></tr>
+                    <tr><td>Characters Typed / Deleted</td><td class="mono" id="raw-typed-deleted">—</td></tr>
+                    <tr><td>Pasted Characters</td><td class="mono" id="raw-pasted">—</td></tr>
+                    <tr><td>Estimated Document Length</td><td class="mono" id="raw-doclen">—</td></tr>
+                    <tr><td>Mean Inter-Key Interval</td><td class="mono" id="raw-mean-flight">—</td></tr>
+                    <tr><td>Mean Key Dwell Time</td><td class="mono" id="raw-mean-dwell">—</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </section><!-- /.doc-section--evidence -->
+
+          <!-- ── III. Cryptographic Proof ───────────────────────────────── -->
+          <section class="doc-section proof-panel">
+            <div class="proof-panel-watermark" aria-hidden="true"></div>
+            <div class="section-roman">III. Cryptographic Proof</div>
+
+            <!-- HMAC block (stamp in bottom row overlaps this area to the left of QR) -->
+            <div class="crypto-hmac-block">
+              <span class="crypto-field-label">Cryptographic Fingerprint (HMAC-SHA256)</span>
+              <code id="proof-fingerprint">—</code>
+            </div>
+
+            <!-- Row 2: Base64 Verification Payload (static block, fixed height) -->
+            <div class="security-footer">
+              <span class="security-footer-label">Verification Payload (Base64)</span>
+              <div class="security-footer-payload">
+                <pre id="proof-signature">—</pre>
+              </div>
+            </div>
+
+            <!-- Row 3: Badge (Left) | Stamp (Center-Left) | QR + URL + CTA (Right) — no overlaps -->
+            <div class="crypto-bottom-row">
+              <div class="proof-bottom-left">
+                <div class="signed-badge" aria-label="Digitally signed and verified by JITTER">
+                  <span class="signed-badge-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </span>
+                  <span class="signed-badge-text">Digitally Signed & Verified by JITTER Protocol</span>
+                </div>
+              </div>
+              <div class="proof-bottom-center">
+                <div class="crypto-stamp-col">
+                  <div id="proof-stamp" class="stamp" aria-label="JITTER seal">
+                    <img class="brand-asset stamp-img" src="jitter_v2.png" alt="JITTER" />
+                    <span class="stamp-label">JITTER</span>
+                    <span class="stamp-status" id="proof-stamp-status">—</span>
+                  </div>
+                </div>
+              </div>
+              <div class="proof-bottom-right">
+                <a id="proof-qr-link" href="#" target="_blank" rel="noopener noreferrer" class="proof-qr-link">
+                  <span id="proof-qr-image"></span>
+                </a>
+                <span class="verify-at" id="verify-portal-host">verify.your-domain.com</span>
+                <p class="verification-cta"><span class="verification-cta-label">Instant verification:</span> This file contains a unique digital signature. To verify, drag this PDF into your verification portal.</p>
+              </div>
+            </div>
+            <p class="proof-verify-guide hidden" id="proof-verify-guide" aria-hidden="true">—</p>
+          </section>
+
+        </div><!-- /.flow -->
+
+        <div id="jitter-pdf-meta" class="jitter-pdf-meta" aria-hidden="true"></div>
+      </section>
+
+      <!-- ── Tamper detected ────────────────────────────────────────────── -->
+      <section id="report-breach" class="report-breach hidden">
+        <div class="report-breach-inner">
+          <h2>Integrity Violation Detected</h2>
+          <p>Cryptographic verification has failed. This certificate may have been tampered with or the stored session data is invalid. Do not treat this document as authoritative.</p>
+        </div>
+      </section>
+
+      <footer class="report-footer">
+        <p>PROTOCOL v1.0.0 | © 2026 Yoav Yoscovitz</p>
+        <p class="jitter-creator-credit no-print">
+          Created by <a href="https://github.com/yoavyoscovitz-wq" target="_blank" rel="noopener noreferrer">Yosco</a>
+        </p>
+      </footer>
+
+            </div><!-- /.report-main-flow -->
+          </div><!-- /.report-columns -->
+        </div><!-- /.report-cert-inner-line -->
+      </div><!-- /.report-cert-double-border -->
+    </main>
+        </div><!-- /.report-main-content -->
+
+        <aside
+          class="actions-sidebar no-print"
+          id="integrity-seal-hub"
+          aria-labelledby="sidebar-seal-title"
+          data-verify-doc-id=""
+        >
+          <button type="button" id="btn-print" class="btn-sidebar-pdf">
+            <span class="btn-sidebar-pdf__icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 2H14L20 8V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M14 2V8H20" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M7 13h10M7 17h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </span>
+            DOWNLOAD FORENSIC REPORT PDF
+          </button>
+
+          <div class="actions-sidebar__card actions-sidebar__card--seal">
+            <h2 id="sidebar-seal-title" class="actions-sidebar__card-title">
+              DIGITAL INTEGRITY SEAL
+            </h2>
+
+            <div class="actions-sidebar__seal-action-row">
+              <button type="button" class="btn-copy-digital-seal" id="btn-copy-digital-seal">
+                <span class="btn-copy-digital-seal__mini" aria-hidden="true">
+                  <img src="jitter_v2.png" alt="" width="36" height="36" />
+                </span>
+                <span class="btn-copy-digital-seal__label">COPY DIGITAL SEAL</span>
+                <span class="btn-copy-digital-seal__icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 9h10v10H9V9Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+            </div>
+
+            <p class="actions-sidebar__card-hint actions-sidebar__seal-helper-text">
+              Instantly copy rich-text HTML for pasting into Google Docs, including the verification link.
+            </p>
+
+            <span id="seal-copy-confirm" class="actions-sidebar__copy-confirm" aria-live="polite"></span>
+
+            <div id="report-signing-notice" class="actions-sidebar__signing-notice hidden" role="alert" aria-live="assertive"></div>
+
+            <div class="actions-sidebar__doc-meta">
+              <span class="actions-sidebar__doc-meta-label">Document ID (verify path)</span>
+              <code id="seal-hub-doc-id" class="actions-sidebar__doc-id">—</code>
+            </div>
+          </div>
+
+        </aside>
+      </div><!-- /.report-page-layout -->
+    </div><!-- /.report-page-shell -->
+
+    <!-- style-src 'unsafe-inline' (manifest) still required: html2canvas applies inline styles while capturing the report for PDF. -->
+    <script src="libs/html2canvas.js"></script>
+    <script src="libs/pdfobject.min.js"></script>
+    <script src="libs/jspdf.umd.min.js"></script>
+    <script src="libs/pdf-lib.min.js"></script>
+    <script src="crypto_layer.js"></script>
+    <script src="config.js"></script>
+    <script src="ui_helpers.js"></script>
+    <script src="jitter_seal_clipboard.js"></script>
+    <script src="report.js"></script>
+  </body>
+</html>

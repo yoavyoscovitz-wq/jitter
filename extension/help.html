@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JITTER — Help Center</title>
+    <link rel="icon" type="image/png" href="jitter_v2.png" />
+    <link rel="stylesheet" href="./branding.css" />
+    <link rel="stylesheet" href="fonts/inter.css" />
+    <link rel="stylesheet" href="help.css" />
+  </head>
+  <body class="help-body">
+    <div class="help-shell">
+      <header class="help-header">
+        <div class="help-brand" aria-hidden="true">JITTER</div>
+        <h1 class="help-title">Help Center</h1>
+        <p class="help-subtitle">Setup, daily use, and answers to common questions.</p>
+      </header>
+
+      <nav class="help-nav" aria-label="Help sections">
+        <button type="button" class="help-nav-btn is-active" data-section="getting-started">
+          Getting Started
+        </button>
+        <button type="button" class="help-nav-btn" data-section="how-to-use">How to Use</button>
+        <button type="button" class="help-nav-btn" data-section="faq">FAQ</button>
+      </nav>
+
+      <main class="help-main" id="help-main" tabindex="-1"></main>
+
+      <footer class="help-footer" id="help-footer"></footer>
+    </div>
+
+    <p class="help-creator jitter-creator-credit">
+      Created by <a href="https://github.com/yoavyoscovitz-wq" target="_blank" rel="noopener noreferrer">Yosco</a>
+    </p>
+
+    <script src="help_content.js"></script>
+    <script src="help.js"></script>
+  </body>
+</html>

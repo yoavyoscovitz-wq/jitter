@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "JITTER: Human Writing Protocol",
+  "short_name": "JITTER",
+  "description": "JITTER turns private keystroke timing in Google Docs into cryptographically signed, independently verifiable proof of human authorship.",
+  "version": "1.0.0",
+  "permissions": [
+    "storage",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://docs.google.com/document/*",
+    "https://YOUR_API_DOMAIN/*",
+    "https://YOUR_REGISTRY_DOMAIN/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://YOUR_API_DOMAIN https://YOUR_REGISTRY_DOMAIN; img-src 'self' https://YOUR_SEAL_IMAGE_DOMAIN data:;"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/document/*"
+      ],
+      "js": [
+        "config.js",
+        "ui_helpers.js",
+        "jitter_core.js",
+        "crypto_layer.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "JITTER",
+    "default_icon": {
+      "16": "jitter_v2.png",
+      "32": "jitter_v2.png",
+      "48": "jitter_v2.png",
+      "128": "jitter_v2.png"
+    }
+  },
+  "icons": {
+    "16": "jitter_v2.png",
+    "32": "jitter_v2.png",
+    "48": "jitter_v2.png",
+    "128": "jitter_v2.png"
+  }
+}

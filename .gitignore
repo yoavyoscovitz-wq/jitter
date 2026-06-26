@@ -1,0 +1,42 @@
+# Environment / secrets
+.env
+.env.local
+.env.*
+!.env.example
+
+# Dependencies & build output
+node_modules/
+dist/
+build/
+.next/
+out/
+.turbo/
+.wrangler/
+
+# Logs & coverage
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+coverage/
+
+# IDE / editor / Cursor
+.vscode/
+.idea/
+.cursor/
+.cursorrules
+*.swp
+*.swo
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Local databases
+*.sqlite
+*.sqlite3
+*.db
+
+# Local build artifacts
+*.zip

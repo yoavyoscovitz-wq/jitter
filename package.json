@@ -1,0 +1,8 @@
+{
+  "name": "jitter",
+  "version": "1.0.0",
+  "description": "JITTER turns private keystroke timing in Google Docs into cryptographically signed, independently verifiable proof of human authorship.",
+  "author": "Yoav Yoscovitz",
+  "license": "MIT",
+  "private": true
+}

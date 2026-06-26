@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JITTER</title>
+    <link rel="icon" type="image/png" href="jitter_v2.png" />
+    <link rel="stylesheet" href="./branding.css" />
+    <link rel="stylesheet" href="fonts/inter.css" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+
+    <button type="button" id="btn-help" class="popup-help-btn" aria-label="Help and setup guide" title="Help">?</button>
+
+    <div id="popup-config-banner-root"></div>
+    <div id="popup-setup-tip-root"></div>
+
+    <!-- ── Centered guardian mascot ─────────────────────────── -->
+    <div class="popup-hero">
+      <div class="popup-dragon-wrap">
+        <img
+          class="popup-dragon"
+          src="assets/jitter_dragon_guardian.webp"
+          alt="JITTER Dragon Guardian mascot"
+        />
+      </div>
+    </div>
+
+    <div class="popup">
+
+      <!-- ── Empty state ─────────────────────────────────── -->
+      <div class="popup-empty" id="popup-empty">
+        <svg class="popup-empty-seal" width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+          <circle cx="22" cy="22" r="20.5" stroke="rgba(26,26,26,0.14)" stroke-width="0.75"/>
+          <circle cx="22" cy="22" r="15"   stroke="rgba(26,26,26,0.12)" stroke-width="0.5" stroke-dasharray="2.5 2.5"/>
+          <circle cx="22" cy="22" r="9"    stroke="rgba(26,26,26,0.1)" stroke-width="0.5"/>
+          <text
+            x="22"
+            y="27"
+            text-anchor="middle"
+            font-size="11"
+            font-family="Inter, sans-serif"
+            font-style="normal"
+            font-weight="800"
+            fill="rgba(26,26,26,0.35)"
+          >J</text>
+        </svg>
+        <p class="popup-empty-text">Open a Google Doc and begin writing to reveal your biometric signature.</p>
+      </div>
+
+      <!-- ── Status card ─────────────────────────────────── -->
+      <section class="status-card hidden" id="popup-status-card">
+        <div class="tier tier--attesting" id="tier-label">Attesting&hellip;</div>
+        <span class="tier-subtitle"></span>
+        <span class="confidence" id="confidence-label">Attestation quality: —</span>
+      </section>
+
+      <!-- ── Session section ─────────────────────────────── -->
+      <section id="popup-session-section" class="hidden">
+        <div class="section-label">Session Record</div>
+        <div class="session-summary">
+          <div class="session-col">
+            <div class="label">Duration</div>
+            <div class="value mono" id="session-time">—</div>
+          </div>
+          <div class="session-col">
+            <div class="label">Keystrokes</div>
+            <div class="value mono" id="session-keys">0</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CTA ─────────────────────────────────────────── -->
+      <div class="cta-row cta-row--dual">
+        <button type="button" id="btn-audit-report" class="cta">Open Certificate</button>
+        <button type="button" id="btn-copy-seal" class="cta cta--copy-seal">Copy Seal</button>
+      </div>
+
+      <div class="popup-awaken-row hidden" id="popup-awaken-row">
+        <button type="button" id="btn-awaken-dragon" class="btn-awaken-dragon" disabled>
+          Awaken Dragon
+        </button>
+      </div>
+
+      <!-- ── Biometric Pulse ─────────────────────────────── -->
+      <div class="popup-pulse-row" aria-hidden="true">
+        <svg class="popup-pulse-svg ekg-breathing" viewBox="0 0 256 22" fill="none" preserveAspectRatio="none">
+          <path class="popup-pulse-path" d="M0,11 L72,11 L80,6.5 L88,15.5 L92,2 L96,20 L100,11 L138,11 L148,7 L158,15 L164,11 L256,11"/>
+        </svg>
+      </div>
+
+      <!-- ── Protocol footer ───────────────────────────────── -->
+      <footer class="popup-muse-footer">
+        <p class="popup-muse-quote">PROTOCOL v1.0.0 | © 2026 Yoav Yoscovitz</p>
+      </footer>
+
+    </div>
+
+    <footer class="popup-support-footer">
+      <p class="jitter-creator-credit">
+        Created by <a href="https://github.com/yoavyoscovitz-wq" target="_blank" rel="noopener noreferrer">Yosco</a>
+      </p>
+    </footer>
+
+    <script src="crypto_layer.js"></script>
+    <script src="config.js"></script>
+    <script src="ui_helpers.js"></script>
+    <script src="jitter_seal_clipboard.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

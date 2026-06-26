@@ -1,0 +1,279 @@
+/* JITTER Help Center — matches onboarding card aesthetic */
+
+:root {
+  --help-bg: #f5f5f7;
+  --help-card: #ffffff;
+  --help-text: #1a1a1a;
+  --help-muted: #5c5c5c;
+  --help-border: #e0e0e4;
+  --help-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --help-accent: var(--jitter-emerald, #10b981);
+  --help-accent-hover: color-mix(in srgb, var(--help-accent) 88%, #000);
+  --help-font: var(--font-main, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.help-body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--help-font);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--help-text);
+  background: var(--help-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px 48px;
+}
+
+.help-shell {
+  width: 100%;
+  max-width: 640px;
+  background: var(--help-card);
+  border-radius: 20px;
+  box-shadow: var(--help-shadow);
+  padding: 28px 28px 24px;
+}
+
+.help-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.help-brand {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--help-muted);
+  margin-bottom: 10px;
+}
+
+.help-title {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.help-subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--help-muted);
+}
+
+.help-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--help-border);
+}
+
+.help-nav-btn {
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--help-border);
+  background: transparent;
+  color: var(--help-muted);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.help-nav-btn:hover {
+  color: var(--help-text);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.help-nav-btn.is-active {
+  background: var(--help-accent);
+  border-color: var(--help-accent);
+  color: #fff;
+}
+
+.help-nav-btn:focus-visible {
+  outline: 2px solid var(--help-accent);
+  outline-offset: 2px;
+}
+
+.help-panel {
+  display: none;
+}
+
+.help-panel.is-active {
+  display: block;
+}
+
+.help-panel-intro {
+  margin: 0 0 18px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--help-muted);
+}
+
+.help-callout {
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.help-callout--info {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+
+.help-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.help-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.help-step-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--help-accent) 12%, #fff);
+  color: var(--help-accent);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.help-step-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.help-step-title {
+  margin: 0 0 4px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--help-text);
+}
+
+.help-step-text {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--help-muted);
+}
+
+.help-faq {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.help-faq-item {
+  border: 1px solid var(--help-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.help-faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+  color: var(--help-text);
+  background: rgba(0, 0, 0, 0.02);
+  border: none;
+  cursor: pointer;
+}
+
+.help-faq-q:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.help-faq-q::after {
+  content: "+";
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--help-muted);
+  transition: transform 0.2s ease;
+}
+
+.help-faq-item.is-open .help-faq-q::after {
+  transform: rotate(45deg);
+}
+
+.help-faq-a {
+  display: none;
+  margin: 0;
+  padding: 0 14px 14px;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--help-muted);
+}
+
+.help-faq-item.is-open .help-faq-a {
+  display: block;
+}
+
+.help-footer {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--help-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  justify-content: center;
+}
+
+.help-footer a {
+  font-size: 0.8125rem;
+  color: var(--help-muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.help-footer a:hover {
+  color: var(--help-accent);
+  border-bottom-color: color-mix(in srgb, var(--help-accent) 40%, transparent);
+}
+
+.help-creator {
+  margin-top: 18px;
+  font-size: 11px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .help-nav-btn,
+  .help-faq-q::after {
+    transition: none;
+  }
+}

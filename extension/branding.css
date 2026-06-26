@@ -1,0 +1,127 @@
+/* ─────────────────────────────────────────────────────────────
+   Global Brand Identity — JITTER
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  --jitter-slate: #1E293B;
+  --jitter-emerald: #10B981;
+  --font-main: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --footer-dim: rgba(15, 23, 42, 0.45);
+}
+
+.jitter-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--jitter-slate);
+}
+
+.jitter-brand span {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--jitter-slate);
+}
+
+.jitter-brand img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+html, body {
+  font-family: var(--font-main);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.jitter-creator-credit {
+  font-family: var(--font-main);
+  font-size: 10px;
+  color: var(--footer-dim);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.jitter-creator-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.jitter-creator-credit a:hover {
+  color: var(--jitter-slate);
+}
+
+.jitter-config-banner {
+  font-family: var(--font-main);
+  font-size: 11px;
+  line-height: 1.45;
+  color: #92400e;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 0 0 12px;
+}
+
+.jitter-config-banner-link {
+  color: #b45309;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.jitter-config-banner-link:hover {
+  color: #92400e;
+}
+
+.jitter-setup-tip {
+  position: relative;
+  font-family: var(--font-main);
+  font-size: 11px;
+  line-height: 1.45;
+  color: #1e40af;
+  background: #eff6ff;
+  border: 1px solid #93c5fd;
+  border-radius: 6px;
+  padding: 8px 28px 8px 12px;
+  margin: 0 0 12px;
+}
+
+.jitter-setup-tip-link {
+  color: #1d4ed8;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.jitter-setup-tip-link:hover {
+  color: #1e3a8a;
+}
+
+.jitter-setup-tip-dismiss {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.jitter-setup-tip-dismiss:hover {
+  color: #1e293b;
+  background: rgba(0, 0, 0, 0.05);
+}

@@ -1,0 +1,531 @@
+:root {
+        --ivory:          #f8f5f2;
+        --ivory-border:   rgba(26, 26, 26, 0.09);
+        --charcoal:       #1a1a1a;
+        --charcoal-mid:   #3c3c3c;
+        --charcoal-muted: rgba(26, 26, 26, 0.46);
+        --charcoal-faint: rgba(26, 26, 26, 0.22);
+        --gold:           #d4af37;
+        --gold-amber:     #a8881e;
+        --gold-dim:       rgba(212, 175, 55, 0.42);
+        --gold-faint:     rgba(212, 175, 55, 0.16);
+        --popup-bg:       #f8f9fa;
+        --popup-surface:  #ffffff;
+        --popup-text:     #1a1a1a;
+        --popup-muted:    rgba(26, 26, 26, 0.55);
+        --popup-faint:    rgba(26, 26, 26, 0.38);
+        --popup-border:   rgba(26, 26, 26, 0.1);
+        --serif: var(--font-main);
+        --mono:  var(--font-main);
+        --ease:  cubic-bezier(0.22, 1, 0.36, 1);
+        --t:     0.45s;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { direction: ltr; text-align: left; }
+
+      body {
+        width: 360px;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: var(--popup-bg);
+        color: var(--popup-text);
+        font-family: var(--font-main);
+        font-size: 12px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        position: relative;
+      }
+
+      .popup-help-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10;
+        width: 26px;
+        height: 26px;
+        padding: 0;
+        border: 1px solid var(--popup-border);
+        border-radius: 50%;
+        background: var(--popup-surface);
+        color: var(--popup-muted);
+        font-family: var(--font-main);
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1;
+        cursor: pointer;
+        transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      }
+
+      .popup-help-btn:hover {
+        color: var(--jitter-emerald, #10b981);
+        border-color: color-mix(in srgb, var(--jitter-emerald, #10b981) 35%, var(--popup-border));
+        background: #fff;
+      }
+
+      .popup-help-btn:focus-visible {
+        outline: 2px solid var(--jitter-emerald, #10b981);
+        outline-offset: 2px;
+      }
+
+      /* ─────────────────────────────────────────────────────
+         Document container
+      ───────────────────────────────────────────────────── */
+      .popup {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        padding: 20px;
+        padding-bottom: 88px;
+        gap: 14px;
+        background-color: var(--popup-bg);
+      }
+
+      /* ─────────────────────────────────────────────────────
+         Empty state
+      ───────────────────────────────────────────────────── */
+      .popup-empty {
+        padding: 20px 0 10px;
+        text-align: center;
+      }
+      .popup-empty-seal {
+        display: block;
+        margin: 0 auto 16px;
+        opacity: 0.18;
+      }
+      .popup-empty-seal { display: none !important; }
+      .popup-empty-text {
+        font-family: var(--font-main);
+        font-style: normal;
+        font-size: 12px;
+        line-height: 1.7;
+        color: var(--popup-muted);
+        max-width: 220px;
+        margin: 0 auto;
+      }
+      .popup-empty.hidden           { display: none !important; }
+      #popup-status-card.hidden,
+      #popup-session-section.hidden { display: none !important; }
+      .hidden                       { display: none !important; }
+
+      /* ─────────────────────────────────────────────────────
+         Status card — the attestation result
+      ───────────────────────────────────────────────────── */
+      .status-card {
+        padding: 18px 16px 14px;
+        position: relative;
+        background: var(--popup-surface);
+        border: 1px solid var(--popup-border);
+        border-radius: 14px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      }
+
+      /* Tier category label — prominent, 20px serif */
+      .status-card .tier {
+        font-family: var(--font-main);
+        font-size: 20px;
+        line-height: 1.1;
+        letter-spacing: 0.02em;
+        color: var(--popup-text);
+        margin-bottom: 6px;
+        overflow-wrap: anywhere;
+        transition: color var(--t) var(--ease);
+        font-weight: 800;
+      }
+
+      /* Per-tier colour */
+      .status-card .tier.tier--human-original { color: var(--jitter-emerald); }
+      .status-card .tier.tier--human-led      { color: var(--jitter-emerald); }
+      .status-card .tier.tier--ai-driven      { color: #991B1B; }
+      .status-card .tier.tier--ai-generated   { color: #991B1B; }
+      .status-card .tier.tier--attesting      {
+        color: var(--popup-muted);
+        font-style: normal;
+      }
+
+      /* State-specific subtitle via CSS :has() — no JS needed */
+      .tier-subtitle {
+        display: block;
+        font-family: var(--font-main);
+        font-style: normal;
+        font-size: 11px;
+        color: var(--popup-muted);
+        line-height: 1.6;
+        min-height: 1.2em;
+        margin-bottom: 2px;
+        transition: opacity var(--t) var(--ease);
+      }
+      #popup-status-card:has(.tier--human-original) .tier-subtitle::after {
+        content: "The mark of an original mind.";
+      }
+      #popup-status-card:has(.tier--human-led) .tier-subtitle::after {
+        content: "Predominantly human in origin.";
+      }
+      #popup-status-card:has(.tier--ai-driven) .tier-subtitle::after {
+        content: "AI assistance detected.";
+      }
+      #popup-status-card:has(.tier--ai-generated) .tier-subtitle::after {
+        content: "Predominantly AI-generated.";
+      }
+      #popup-status-card:has(.tier--attesting) .tier-subtitle::after {
+        content: "Gathering your biometric signature\2026";
+      }
+
+      /* AI Generated verdict — institutional separation from session data */
+      #popup-status-card:has(.tier--ai-generated) {
+        background-color: rgba(254, 242, 242, 0.95);
+        border: 1px solid rgba(248, 113, 113, 0.35);
+        margin-bottom: 2px;
+      }
+
+      /* Attestation quality label */
+      .status-card .confidence {
+        display: block;
+        font-family: var(--font-main);
+        font-size: 8px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--popup-faint);
+        margin-top: 12px;
+      }
+
+      /* ─────────────────────────────────────────────────────
+         Session section — Da Vinci sketch cells
+      ───────────────────────────────────────────────────── */
+      #popup-session-section {
+        padding: 0;
+      }
+
+      .section-label {
+        font-family: var(--font-main);
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(168, 136, 30, 0.72);
+        margin-bottom: 10px;
+      }
+      .session-summary {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .session-col {
+        position: relative;
+        padding: 14px 12px 12px;
+        background: var(--popup-surface);
+        border: 1px solid var(--popup-border);
+        border-radius: 12px;
+        text-align: left;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      }
+      .session-col .label {
+        font-family: var(--font-main);
+        font-size: 9px;
+        font-weight: 300;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--popup-muted);
+        margin-bottom: 8px;
+        white-space: nowrap;
+      }
+      .session-col .value {
+        font-family: var(--font-main);
+        font-size: 18px;
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.01em;
+        color: var(--popup-text);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        transition: color var(--t) var(--ease);
+      }
+      .session-col .value.mono { font-size: 18px; }
+      .session-col .value .dur-num {
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+      }
+      .session-col .value .dur-unit {
+        font-size: 0.72em;
+        font-weight: 500;
+        text-transform: lowercase;
+        margin-left: 0.12em;
+        letter-spacing: 0;
+        color: var(--popup-muted);
+      }
+
+      /* ─────────────────────────────────────────────────────
+         CTA — Open Certificate
+      ───────────────────────────────────────────────────── */
+      .cta-row {
+        padding: 0;
+      }
+      .cta-row--dual {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .cta-row--dual .cta {
+        flex: 1;
+        min-width: 0;
+      }
+      .cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 12px 10px;
+        border-radius: 12px;
+        background: #00e676;
+        color: #000000;
+        border: 2px solid #000000;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+        font-family: var(--font-main);
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        cursor: pointer;
+        text-align: center;
+        transition:
+          background var(--t) var(--ease),
+          border-color var(--t) var(--ease),
+          transform 0.12s ease;
+      }
+      .cta:hover {
+        background: #00c853;
+        border-color: #000000;
+        color: #000000;
+      }
+      .cta:active { transform: translateY(1px); background: #00b248; color: #000000; }
+      .cta--copy-seal {
+        background: #10b981;
+        color: #ffffff;
+        border-color: #047857;
+        box-shadow: 0 2px 0 rgba(4, 120, 87, 0.35);
+      }
+      .cta--copy-seal:hover {
+        background: #059669;
+        color: #ffffff;
+        border-color: #065f46;
+      }
+      .cta--copy-seal:active {
+        background: #047857;
+        color: #ffffff;
+      }
+      .cta--copy-seal:disabled {
+        opacity: 0.75;
+        cursor: wait;
+        transform: none;
+      }
+
+      /* ─────────────────────────────────────────────────────
+         Awaken Dragon (ghost)
+      ───────────────────────────────────────────────────── */
+      .popup-awaken-row {
+        padding: 0;
+      }
+      .btn-awaken-dragon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 11px 16px;
+        border-radius: 999px;
+        box-sizing: border-box;
+        font-family: var(--font-main);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: var(--gold-amber);
+        background: transparent;
+        border: 1px solid rgba(168, 136, 30, 0.45);
+        transition:
+          border-color var(--t) var(--ease),
+          color var(--t) var(--ease),
+          background var(--t) var(--ease),
+          opacity 0.25s ease;
+      }
+      .btn-awaken-dragon:hover:not(:disabled) {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: rgba(212, 175, 55, 0.12);
+      }
+      .btn-awaken-dragon:active:not(:disabled) {
+        transform: translateY(1px);
+      }
+      .btn-awaken-dragon:disabled {
+        opacity: 0.32;
+        cursor: default;
+        pointer-events: none;
+      }
+      .btn-awaken-dragon:focus-visible {
+        outline: 2px solid var(--gold-dim);
+        outline-offset: 2px;
+      }
+
+      /* ─────────────────────────────────────────────────────
+         Biometric Pulse row — permanent decorative element
+      ───────────────────────────────────────────────────── */
+      .popup-pulse-row {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .popup-pulse-svg {
+        display: block;
+        width: 100%;
+        max-width: 256px;
+        height: 22px;
+        opacity: 0.35;
+        transition: opacity var(--t) var(--ease);
+      }
+      .popup-pulse-path {
+        stroke: rgba(168, 136, 30, 0.45);
+        stroke-width: 0.9;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      /* EKG “breathing” when session is idle (no recent keystroke storage updates) */
+      @keyframes jitter-ekg-breathe {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 0.8; }
+      }
+      .popup-pulse-svg.ekg-breathing {
+        animation: jitter-ekg-breathe 3.8s ease-in-out infinite;
+      }
+      .popup-pulse-svg:not(.ekg-breathing) {
+        opacity: 0.72;
+        transition: opacity 0.5s ease;
+      }
+
+      /* ─────────────────────────────────────────────────────
+         Tier reveal animation
+      ───────────────────────────────────────────────────── */
+      @keyframes jitter-tier-in {
+        from { opacity: 0; transform: translateY(4px); }
+        to   { opacity: 1; transform: translateY(0);   }
+      }
+      .status-card .tier {
+        transition: color var(--t) var(--ease), opacity 0.35s ease;
+      }
+      .status-card .tier.tier--attesting {
+        animation: jitter-tier-in 0.4s var(--ease) both;
+      }
+
+      /* ─────────────────────────────────────────────────────
+         Sophocles footer
+      ───────────────────────────────────────────────────── */
+      .popup-muse-footer {
+        padding: 0;
+        text-align: center;
+      }
+      .popup-muse-quote {
+        font-family: var(--font-main);
+        font-style: normal;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--footer-dim);
+        line-height: 1.65;
+      }
+
+      .popup-hero {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px 20px 12px;
+        background: linear-gradient(180deg, #ffffff 0%, #f1f3f5 100%);
+        border-bottom: 1px solid var(--popup-border);
+        overflow: visible;
+      }
+
+      .popup-dragon-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+      }
+
+      .popup-dragon {
+        height: clamp(80px, 24vw, 96px);
+        width: auto;
+        max-width: 100%;
+        display: block;
+        object-fit: contain;
+        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+      }
+
+      /* Support footer — fixed bottom; link uses target + rel in HTML (MV3 / CSP safe) */
+      .popup-support-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        border-top: 1px solid var(--popup-border);
+        background-color: var(--popup-surface);
+        z-index: 10;
+        padding: 8px 16px 10px;
+      }
+
+      #popup-config-banner-root {
+        padding: 10px 12px 0;
+      }
+
+      #popup-config-banner-root .jitter-config-banner {
+        margin-bottom: 0;
+      }
+
+      .popup-learn-link,
+      .popup-support-link {
+        display: block;
+        width: 100%;
+        padding: 8px 16px;
+        font-family: var(--font-main);
+        line-height: 1.45;
+        letter-spacing: 0.03em;
+        text-align: center;
+        text-decoration: none;
+        transition: color 0.28s var(--ease), opacity 0.28s var(--ease);
+      }
+
+      .popup-learn-link {
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--jitter-slate);
+        opacity: 0.72;
+        padding-top: 10px;
+      }
+
+      .popup-learn-link:hover {
+        color: var(--gold-amber);
+        opacity: 1;
+      }
+
+      .popup-support-link {
+        font-size: 10px;
+        color: var(--popup-muted);
+        padding-bottom: 10px;
+      }
+
+      .popup-support-link:hover {
+        color: var(--jitter-emerald);
+      }
+
+      .popup-learn-link:focus-visible,
+      .popup-support-link:focus-visible {
+        outline: 2px solid rgba(16, 185, 129, 0.35);
+        outline-offset: -2px;
+      }

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="JITTER turns private keystroke timing in Google Docs into cryptographically signed, independently verifiable proof of human authorship." />
+  <meta property="og:title" content="JITTER — Document Verification Portal" />
+  <meta property="og:description" content="JITTER turns private keystroke timing in Google Docs into cryptographically signed, independently verifiable proof of human authorship." />
+  <meta property="og:image" content="jitter_v2.png" />
+  <meta property="og:type" content="website" />
+  <meta property="twitter:card" content="summary" />
+  <meta property="twitter:title" content="JITTER — Document Verification Portal" />
+  <meta property="twitter:description" content="JITTER turns private keystroke timing in Google Docs into cryptographically signed, independently verifiable proof of human authorship." />
+  <title>JITTER — Document Verification Portal</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2056%2058%22%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%221.8%22%20stroke-linejoin%3D%22round%22%20d%3D%22M28%204L6%2013V31C6%2043.15%2015.85%2054.05%2028%2057C40.15%2054.05%2050%2043.15%2050%2031V13L28%204Z%22%2F%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22%231e40af%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20d%3D%22M20%2028L26%2034L38%2022%22%2F%3E%3C%2Fsvg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="branding.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- pdf-lib: local metadata extraction via structured PDF info dict -->
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════ HEADER ══════════════════════════════════════ -->
+  <header>
+    <div class="header-inner">
+      <p class="header-site-title">JITTER — Document Verification Portal</p>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════ MAIN ══════════════════════════════════════ -->
+  <main>
+    <div class="portal-container">
+
+      <p class="eyebrow">JITTER Trust Infrastructure</p>
+
+      <!-- ─────────────────── PORTAL CARD ─────────────────── -->
+      <div class="portal-card" id="portalCard">
+        <div id="verify-config-banner-root"></div>
+        <!-- ───── STATE: IDLE ───── -->
+        <div id="stateIdle" class="card-state">
+          <div class="portal-icon-wrap">
+            <svg viewBox="0 0 56 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M28 4L6 13V31C6 43.15 15.85 54.05 28 57C40.15 54.05 50 43.15 50 31V13L28 4Z"
+                    stroke="#0F172A" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M20 28L26 34L38 22" stroke="#1e40af" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <h1>Verify Document Authenticity</h1>
+          <p class="subtitle">
+            Upload a JITTER-signed PDF to verify its cryptographic seal.<br class="br-break">
+            Processing stays in your browser.
+          </p>
+
+          <p id="attestationRouteNotice" class="attestation-route-notice hidden" role="status" aria-live="polite"></p>
+
+          <section id="attestationCard" class="attestation-card hidden" aria-live="polite">
+            <div class="attestation-head">
+              <span class="attestation-eyebrow">Digital attestation</span>
+              <span class="attestation-status">Registry record</span>
+            </div>
+            <div class="attestation-score-wrap">
+              <span id="attestationScore" class="attestation-score">&mdash;</span>
+              <span id="attestationScoreLabel" class="attestation-score-label">Tier</span>
+            </div>
+            <div class="attestation-meta">
+              <span class="attestation-meta-label">Word count</span>
+              <span id="attestationWordCount" class="attestation-meta-value">&mdash;</span>
+            </div>
+            <div class="attestation-match-box">
+              <span class="attestation-box-title">Content fingerprint</span>
+              <div class="attestation-fingerprint-row">
+                <code id="attestationFingerprint" class="attestation-fingerprint" title="">&mdash;</code>
+                <button type="button" id="attestationCopyHash" class="attestation-copy-btn" hidden>Copy</button>
+              </div>
+            </div>
+            <p class="attestation-help">
+              The registry stores a digital hash of document text (not the file itself). After you verify a PDF, the portal compares this fingerprint to the extracted text so the seal matches the registered version.
+            </p>
+          </section>
+
+          <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" accept=".pdf,.PDF" aria-label="Upload JITTER-certified PDF" />
+            <div class="drop-zone-inner" id="dropZoneInner">
+              <div class="drop-icon-slot">
+                <svg class="drop-icon" viewBox="0 0 52 52" fill="none">
+                  <rect x="7" y="3" width="28" height="38" rx="4" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M35 3l10 10H35V3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                  <path d="M16 49v-9M16 49l-5-5M16 49l5-5" stroke="#1e40af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M28 41h7M28 45h5M28 49h3" stroke="#1e40af" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <span class="drop-spinner" aria-hidden="true"></span>
+              </div>
+              <span class="drop-primary">Drop PDF here</span>
+              <span class="drop-secondary">or <span class="drop-link">browse files</span></span>
+            </div>
+          </div>
+
+          <p class="file-note">
+            <svg viewBox="0 0 16 16" fill="none" width="13" height="13">
+              <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M8 7v5M8 5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Accepts JITTER-certified PDF documents only
+          </p>
+        </div>
+
+        <!-- ───── STATE: AUDITING ───── -->
+        <div id="stateAuditing" class="card-state hidden">
+          <div class="spinner-wrap">
+            <div class="spinner-rings">
+              <div class="ring ring-a"></div>
+              <div class="ring ring-b"></div>
+              <div class="ring ring-c"></div>
+              <div class="spinner-core">
+                <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+                  <path d="M12 2L4 5.5V11C4 15.97 7.58 20.6 12 22C16.42 20.6 20 15.97 20 11V5.5L12 2Z"
+                        stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <h2>Verification in progress</h2>
+          <p class="subtitle">Checking signature and document integrity</p>
+
+          <div class="audit-steps">
+            <div class="audit-step" id="step1">
+              <svg class="step-idle" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" stroke="#94A3B8" stroke-width="1.5" fill="none"/></svg>
+              <svg class="step-done hidden" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="#1e40af"/><path d="M6.5 10.5l2.5 2.5 4.5-5.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Validating HMAC-SHA256 signature</span>
+            </div>
+            <div class="audit-step" id="step2">
+              <svg class="step-idle" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" stroke="#94A3B8" stroke-width="1.5" fill="none"/></svg>
+              <svg class="step-done hidden" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="#1e40af"/><path d="M6.5 10.5l2.5 2.5 4.5-5.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Verifying document integrity chain</span>
+            </div>
+            <div class="audit-step" id="step3">
+              <svg class="step-idle" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" stroke="#94A3B8" stroke-width="1.5" fill="none"/></svg>
+              <svg class="step-done hidden" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="#1e40af"/><path d="M6.5 10.5l2.5 2.5 4.5-5.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Cross-referencing institutional registry</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── STATE: SUCCESS ───── -->
+        <div id="stateSuccess" class="card-state hidden">
+          <div class="success-header">
+            <div class="check-wrap">
+              <svg class="check-svg" viewBox="0 0 84 84" fill="none">
+                <circle class="check-bg" cx="42" cy="42" r="40"/>
+                <circle class="check-ring" cx="42" cy="42" r="40"/>
+                <polyline class="check-mark" points="25,42 36,53 59,29"/>
+              </svg>
+            </div>
+            <div class="auth-badge">
+              <svg viewBox="0 0 16 16" fill="none" width="13" height="13">
+                <path d="M8 1L2 4v5c0 3.3 2.6 6.4 6 7.2C11.4 15.4 14 12.3 14 9V4L8 1z"
+                      fill="rgba(16,185,129,0.15)" stroke="#10B981" stroke-width="1.2"/>
+                <path d="M5.5 8l2 2 3-3.5" stroke="#10B981" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Verification succeeded
+            </div>
+          </div>
+
+          <div class="cert-divider">
+            <span class="cert-divider-label">Certificate of authenticity</span>
+          </div>
+
+          <div class="cert-fields">
+            <div class="cert-row">
+              <div class="cert-field">
+                <span class="cert-label">Google Doc ID</span>
+                <span class="cert-value mono" id="certDocId">&mdash;</span>
+              </div>
+              <div class="cert-field">
+                <span class="cert-label">Timestamp</span>
+                <span class="cert-value" id="certTimestamp">&mdash;</span>
+              </div>
+            </div>
+            <div class="cert-row">
+              <div class="cert-field">
+                <span class="cert-label">Humanity score (1–100)</span>
+                <span class="cert-value" id="certHumanityScore">&mdash;</span>
+              </div>
+              <div class="cert-field">
+                <span class="cert-label">File size</span>
+                <span class="cert-value" id="certFileSize">&mdash;</span>
+              </div>
+            </div>
+            <div class="cert-field cert-full">
+              <span class="cert-label">Document hash (SHA-256)</span>
+              <span class="cert-value mono hash" id="certHash">&mdash;</span>
+            </div>
+          </div>
+
+          <button class="btn-download" id="btnDownload">
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
+              <path d="M8 3v7M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3 12h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            Download audit receipt
+          </button>
+
+          <div class="cert-footer">
+            <div class="jitter-seal">
+              <img class="brand-asset jitter-seal-img" src="jitter_v2.png" alt="JITTER seal" />
+              <div class="seal-text">
+                <span class="seal-name">JITTER</span>
+                <span class="seal-sub">Digital seal</span>
+              </div>
+            </div>
+            <button class="btn-reset" id="btnReset">
+              <svg viewBox="0 0 16 16" fill="none" width="13" height="13">
+                <path d="M2 8a6 6 0 1 1 1.5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M2 12V8h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Verify Another Document
+            </button>
+          </div>
+        </div>
+
+        <!-- ───── STATE: FAILURE ───── -->
+        <div id="stateFailure" class="card-state hidden">
+          <div class="fail-icon-wrap">
+            <svg viewBox="0 0 84 84" fill="none">
+              <circle cx="42" cy="42" r="40" fill="rgba(239,68,68,0.07)"/>
+              <circle cx="42" cy="42" r="40" stroke="rgba(239,68,68,0.25)" stroke-width="1.5"/>
+              <path d="M29 29l26 26M55 29L29 55" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h2>Verification Failed</h2>
+          <p class="subtitle">This document could not be authenticated<br>as a JITTER-issued certificate.</p>
+          <div class="fail-notice">
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
+              <circle cx="8" cy="8" r="7" stroke="#EF4444" stroke-width="1.4"/>
+              <path d="M8 5v4M8 11v.5" stroke="#EF4444" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            <span id="failMessage">Invalid format or missing cryptographic signature</span>
+          </div>
+          <button class="btn-reset btn-reset-fail" id="btnResetFail">
+            <svg viewBox="0 0 16 16" fill="none" width="13" height="13">
+              <path d="M2 8a6 6 0 1 1 1.5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M2 12V8h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Try Another Document
+          </button>
+        </div>
+
+        <!-- ───── STATE: BREACH ───── -->
+        <div id="stateBreach" class="card-state hidden">
+          <div class="breach-icon-wrap">
+            <svg viewBox="0 0 84 84" fill="none">
+              <path d="M42 6L4 74h76L42 6Z" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.3)" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M42 32v18M42 58v3" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h2 class="breach-title">Integrity failure</h2>
+          <p class="subtitle" id="breachDetail">Integrity check failed. Document has been altered or signature is forged.</p>
+          <div class="breach-notice">
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14" style="flex-shrink:0;margin-top:1px">
+              <path d="M8 2L1 13h14L8 2Z" stroke="#EF4444" stroke-width="1.3" stroke-linejoin="round"/>
+              <path d="M8 7v3M8 12v.5" stroke="#EF4444" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            This document may have been tampered with after signing. Do not accept it as proof of authenticity.
+          </div>
+          <button class="btn-reset btn-reset-fail" id="btnResetBreach">
+            <svg viewBox="0 0 16 16" fill="none" width="13" height="13">
+              <path d="M2 8a6 6 0 1 1 1.5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M2 12V8h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Try Another Document
+          </button>
+        </div>
+
+      </div><!-- /portal-card -->
+
+      <!-- ─────────────────── TRUST GRID ─────────────────── -->
+      <div class="trust-grid">
+        <div class="trust-item">
+          <span class="trust-idx">01</span>
+          <h3>Keyed integrity</h3>
+          <p>Verified using HMAC-SHA256 under the custodial protocol.</p>
+        </div>
+        <div class="trust-item">
+          <span class="trust-idx">02</span>
+          <h3>Local processing</h3>
+          <p>Document content is not uploaded; verification runs in your browser.</p>
+        </div>
+        <div class="trust-item">
+          <span class="trust-idx">03</span>
+          <h3>Standard algorithms</h3>
+          <p>AES-256 and SHA-256 as referenced in protocol documentation.</p>
+        </div>
+        <div class="trust-item">
+          <span class="trust-idx">04</span>
+          <h3>Smart Paste Filter</h3>
+          <p>JITTER v1.0.0 ignores seal-only, URL-only, micro-pastes, and image-only clips so legitimate pasting is not penalized.</p>
+        </div>
+      </div>
+
+    </div><!-- /portal-container -->
+  </main>
+
+  <!-- ══════════════════════════════════════ FOOTER ══════════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-brand-mark" src="jitter_v2.png" alt="" />
+        <span class="footer-meta">Protocol v1.0.0 · © 2026 · Yoav Yoscovitz</span>
+      </div>
+      <p class="jitter-creator-credit">
+        Created by <a href="https://github.com/yoavyoscovitz-wq" target="_blank" rel="noopener noreferrer">Yosco</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════ SCRIPT ══════════════════════════════════════ -->
+  <script src="script.js"></script>
+</body>
+</html>

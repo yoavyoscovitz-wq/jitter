@@ -1,0 +1,12 @@
+# JITTER DB API — Cloudflare Worker (KV attestation registry)
+# Bind a KV namespace before deploy: wrangler kv namespace create JITTER_ATTESTATIONS
+# Then set the id below from the command output.
+
+name = "jitter-db-api"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "ATTESTATIONS"
+id = "2ef7db43e0bd471f8a433d0860b38d2c"
+preview_id = "REPLACE_WITH_PREVIEW_KV_ID_OPTIONAL"

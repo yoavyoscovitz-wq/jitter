@@ -1,0 +1,69 @@
+/* Scalisos / JITTER — institutional design tokens (org-level overrides). */
+
+:root {
+  --navy: #0f172a;
+  --navy-mid: #1e293b;
+  --navy-lt: #334155;
+  --slate: #64748b;
+  --slate-lt: #94a3b8;
+  --border: #e5e7eb;
+  --surface: #f9fafb;
+  --white: #ffffff;
+  --bg-page: #f4f5f7;
+
+  /* Primary accent — institutional blue (replaces cyan-as-hero); --cyan kept for compatibility */
+  --accent: #1e40af;
+  --accent-dim: rgba(30, 64, 175, 0.08);
+  --accent-glow: rgba(30, 64, 175, 0.12);
+  --cyan: #1e40af;
+  --cyan-dim: rgba(30, 64, 175, 0.08);
+  --cyan-glow: rgba(30, 64, 175, 0.14);
+
+  --green: #047857;
+  --green-bright: #059669;
+  --red: #b91c1c;
+  --red-bright: #dc2626;
+
+  --font: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  --r-card: 14px;
+  --r-sm: 8px;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 4px 16px rgba(15, 23, 42, 0.06);
+  --shadow-xl: 0 4px 6px rgba(15, 23, 42, 0.04), 0 12px 32px rgba(15, 23, 42, 0.08);
+
+  --focus-ring: 0 0 0 2px var(--white), 0 0 0 4px rgba(30, 64, 175, 0.35);
+  --footer-dim: rgba(15, 23, 42, 0.45);
+}
+
+.jitter-creator-credit {
+  font-family: var(--font);
+  font-size: 11px;
+  color: var(--footer-dim);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.jitter-creator-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.jitter-creator-credit a:hover {
+  color: var(--navy);
+}
+
+.jitter-config-banner {
+  font-family: var(--font);
+  font-size: 12px;
+  line-height: 1.45;
+  color: #92400e;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 0 0 16px;
+}

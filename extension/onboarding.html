@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JITTER — Welcome</title>
+    <link rel="icon" type="image/png" href="jitter_v2.png" />
+    <link rel="stylesheet" href="./branding.css" />
+    <link rel="stylesheet" href="onboarding.css" />
+  </head>
+  <body class="onboarding-body">
+    <noscript>
+      <p class="onboard-noscript">JavaScript is required for the onboarding tutorial. Enable scripts and reload this page to continue.</p>
+    </noscript>
+    <div class="onboard-shell">
+      <div class="onboard-top-row">
+        <div class="brand" aria-hidden="true">JITTER</div>
+        <a href="help.html#getting-started" class="onboard-help-link" id="onboard-help-link">Need help setting up?</a>
+      </div>
+      <section
+        class="carousel"
+        aria-roledescription="carousel"
+        aria-label="JITTER introduction"
+        tabindex="0"
+      >
+        <h1 class="visually-hidden">JITTER onboarding tutorial</h1>
+        <div class="carousel-viewport">
+          <article
+            class="slide is-active"
+            data-slide-index="0"
+            id="slide-0"
+            aria-hidden="false"
+            aria-labelledby="slide-0-title"
+          >
+            <div class="slide-media">
+              <img
+                src="assets/jitter_dragon_welcome.webp"
+                width="280"
+                height="280"
+                alt="Friendly dragon mascot waving hello"
+              />
+            </div>
+            <div class="slide-copy">
+              <h2 class="slide-title" id="slide-0-title">Welcome to JITTER</h2>
+              <p class="slide-body">
+                JITTER turns your writing rhythm into cryptographic proof that a human authored your work.
+              </p>
+            </div>
+          </article>
+          <article
+            class="slide"
+            data-slide-index="1"
+            id="slide-1"
+            aria-hidden="true"
+            aria-labelledby="slide-1-title"
+          >
+            <div class="slide-media">
+              <img
+                src="assets/jitter_dragon_guardian.webp"
+                width="280"
+                height="280"
+                alt="Dragon mascot standing guard over your privacy"
+              />
+            </div>
+            <div class="slide-copy">
+              <h2 class="slide-title" id="slide-1-title">Privacy by Design</h2>
+              <p class="slide-body">
+                Keystroke timing analysis runs entirely on your device. A privacy-preserving hash of writing metadata is sent to the signing server to generate your certificate. No raw document text is ever transmitted.
+              </p>
+            </div>
+          </article>
+          <article
+            class="slide"
+            data-slide-index="2"
+            id="slide-2"
+            aria-hidden="true"
+            aria-labelledby="slide-2-title"
+          >
+            <div class="slide-media">
+              <img
+                src="assets/jitter_dragon_explaining.webp"
+                width="280"
+                height="280"
+                alt="Dragon mascot explaining verification"
+              />
+            </div>
+            <div class="slide-copy">
+              <h2 class="slide-title" id="slide-2-title">Real-Time Verification</h2>
+              <p class="slide-body">
+                As you write in Google Docs, JITTER learns your unique rhythm.
+                The Dragon Guardian HUD shows your Humanity tier in real time.
+              </p>
+            </div>
+          </article>
+          <article
+            class="slide"
+            data-slide-index="3"
+            id="slide-3"
+            aria-hidden="true"
+            aria-labelledby="slide-3-title"
+          >
+            <div class="slide-media">
+              <img
+                src="assets/jitter_dragon_calibrated.webp"
+                width="280"
+                height="280"
+                alt="Dragon mascot with a calibrated checkmark"
+              />
+            </div>
+            <div class="slide-copy">
+              <h2 class="slide-title" id="slide-3-title">Seamless Calibration</h2>
+              <p class="slide-body">
+                JITTER calibrates while you naturally type. No boring tests required. Just be yourself.
+              </p>
+            </div>
+          </article>
+          <article
+            class="slide"
+            data-slide-index="4"
+            id="slide-4"
+            aria-hidden="true"
+            aria-labelledby="slide-4-title"
+          >
+            <div class="slide-media">
+              <img
+                src="assets/jitter_dragon_launching.webp"
+                width="280"
+                height="280"
+                alt="Dragon mascot ready for launch"
+              />
+            </div>
+            <div class="slide-copy">
+              <h2 class="slide-title" id="slide-4-title">You&rsquo;re All Set</h2>
+              <p class="slide-body">
+                Start writing and prove the value of your human creativity to the world.
+              </p>
+              <div class="setup-teaser" id="setup-teaser">
+                <p class="setup-teaser-title">Self-hosting from GitHub?</p>
+                <ol class="setup-teaser-steps">
+                  <li>Deploy your backend</li>
+                  <li>Edit <code>config.js</code> and <code>manifest.json</code></li>
+                  <li>Open a Google Doc and type</li>
+                </ol>
+                <a href="help.html#getting-started" class="btn btn--setup" id="setup-guide-link">Open Setup Guide</a>
+              </div>
+              <p class="setup-notice hidden" id="setup-notice" role="status">
+                Backend not configured yet — see the Setup Guide.
+              </p>
+              <p class="slide-link-wrap">
+                <a
+                  href="https://github.com/yoavyoscovitz-wq/jitter"
+                  class="slide-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View the open-source protocol on GitHub</a>
+              </p>
+            </div>
+          </article>
+        </div>
+        <nav class="carousel-footer" aria-label="Tutorial steps">
+          <div class="carousel-dots" role="tablist" aria-label="Slide">
+            <button
+              type="button"
+              class="carousel-dot is-active"
+              role="tab"
+              aria-selected="true"
+              aria-controls="slide-0"
+              id="dot-0"
+              data-slide-to="0"
+            >
+              <span class="visually-hidden">Slide 1, Welcome</span>
+            </button>
+            <button
+              type="button"
+              class="carousel-dot"
+              role="tab"
+              aria-selected="false"
+              aria-controls="slide-1"
+              id="dot-1"
+              data-slide-to="1"
+            >
+              <span class="visually-hidden">Slide 2, Privacy</span>
+            </button>
+            <button
+              type="button"
+              class="carousel-dot"
+              role="tab"
+              aria-selected="false"
+              aria-controls="slide-2"
+              id="dot-2"
+              data-slide-to="2"
+            >
+              <span class="visually-hidden">Slide 3, Real-time verification</span>
+            </button>
+            <button
+              type="button"
+              class="carousel-dot"
+              role="tab"
+              aria-selected="false"
+              aria-controls="slide-3"
+              id="dot-3"
+              data-slide-to="3"
+            >
+              <span class="visually-hidden">Slide 4, Calibration</span>
+            </button>
+            <button
+              type="button"
+              class="carousel-dot"
+              role="tab"
+              aria-selected="false"
+              aria-controls="slide-4"
+              id="dot-4"
+              data-slide-to="4"
+            >
+              <span class="visually-hidden">Slide 5, Ready</span>
+            </button>
+          </div>
+          <div class="carousel-actions">
+            <button type="button" id="carousel-back" class="btn btn--ghost">Back</button>
+            <div class="carousel-actions-primary">
+              <button type="button" id="carousel-next" class="btn btn--primary">Next</button>
+              <button type="button" id="carousel-launch" class="btn btn--primary" hidden>
+                Launch JITTER
+              </button>
+            </div>
+          </div>
+        </nav>
+      </section>
+    </div>
+    <p class="onboard-creator jitter-creator-credit">
+      Created by <a href="https://github.com/yoavyoscovitz-wq" target="_blank" rel="noopener noreferrer">Yosco</a>
+    </p>
+    <script src="config.js"></script>
+    <script src="ui_helpers.js"></script>
+    <script src="onboarding.js"></script>
+  </body>
+</html>
