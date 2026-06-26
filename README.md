@@ -5,7 +5,7 @@
 ### Human Writing Protocol
 
 [![Live Website](https://img.shields.io/badge/Live%20Website-scalisos.com-6366f1?style=for-the-badge)](https://scalisos.com)
-[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Install-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/jitter-human-writing-prot/fdogigjejmephndmggbeffogkinip)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Install-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)]([https://chromewebstore.google.com/detail/jitter-human-writing-prot/fdogigjejmephndmggbeffogkinip](https://chromewebstore.google.com/detail/jitter/fdogigjejmephndmblmggbeffogkinip))
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Manifest V3](https://img.shields.io/badge/Chrome%20Extension-Manifest%20V3-green.svg)](extension/manifest.json)
